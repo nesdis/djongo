@@ -141,6 +141,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
             'SSL': 'ssl',
             'SSL_CERTFILE': 'ssl_certfile',
             'SSL_CA_CERTS': 'ssl_ca_certs',
+            'SSL_CERT_REQS': 'ssl_cert_reqs',
             'READ_PREFERENCE': 'read_preference'
         }
         connection_params = {
@@ -149,12 +150,12 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         }
         for setting_name, kwarg in valid_settings.items():
             try:
-                setting = self.settings_dict[setting_name]
+                value = self.settings_dict[setting_name]
             except KeyError:
                 continue
 
-            if setting or setting is False:
-                connection_params[kwarg] = setting
+            if value or value is False or value == 0:
+                connection_params[kwarg] = value
 
         return connection_params
 

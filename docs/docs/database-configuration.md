@@ -21,6 +21,7 @@ The following options are supported in `settings.py`:
             'SSL': 'ssl',
             'SSL_CERTFILE': 'ssl_certfile',
             'SSL_CA_CERTS': 'ssl_ca_certs',
+            'SSL_CERT_REQS': 'ssl_cert_reqs',
             'READ_PREFERENCE': 'read_preference'
         }
     }
