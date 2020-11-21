@@ -132,7 +132,7 @@ class GridFSStorage(Storage):
             raise ValueError("This file is not accessible via a URL.")
         gridfs, filename = self._get_gridfs(name)
         try:
-            file_oid = gridfs.get_last_version(filename=name).__getattr__('_id')
+            file_oid = gridfs.get_last_version(filename=filename).__getattr__('_id')
         except NoFile:
             # In case not found by filename
             try:
@@ -164,6 +164,10 @@ class GridFSStorage(Storage):
         if not hasattr(self, '_db'):
             from django.db import connections
             self._db = connections[self.database].connection
+
+        if self._db is None: 
+            connections[self.database].connect()                                       
+            self._db = connections[self.database].connection             
 
         return GridFS(self._db, collection_name), filename
 
