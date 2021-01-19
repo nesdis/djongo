@@ -1,6 +1,7 @@
-sqlparse==0.2.4
+sqlparse>=0.2.4
 pymongo>=3.2.0
-django>=2.0,<=3.1.2
+django>=2.1
+dnspython>=2.0
 
  # requirements.txt
  #

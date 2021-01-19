@@ -81,9 +81,10 @@ def find_version(*file_paths):
 
 
 install_requires = [
-    'sqlparse==0.2.4',
+    'sqlparse>=0.2.4',
     'pymongo>=3.2.0',
-    'django>=2.1,<=3.0.5',
+    'django>=2.1',
+    'dnspython>=2.0',
 ]
 
 if sys.version_info.major == 3 and sys.version_info.minor < 7:
