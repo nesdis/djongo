@@ -100,6 +100,7 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         'endswith': 'LIKE %s',
         'istartswith': 'iLIKE %s',
         'iendswith': 'iLIKE %s',
+        'contains_any': '= LIST_CONTAINS_ANY(%s)',
     }
 
     vendor = 'djongo'

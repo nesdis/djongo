@@ -7,6 +7,10 @@ from .fields import (
     GenericObjectIdField, JSONField
 )
 
+from .lookups import (
+    ContainsAny
+)
+
 __all__ = django_models + [
     'DjongoManager', 'ArrayField',
     'EmbeddedField', 'ArrayReferenceField', 'ObjectIdField',
