@@ -47,6 +47,9 @@ class Cursor:
         return self.result.last_row_id
 
     def execute(self, sql, params=None):
+        # print("SQL >>>>>", sql)
+        # print("PARAMS >>", params)
+        # print('- * - * - * - * - * - * - * - * - * - * -')
         try:
             self.result = Query(
                 self.client_conn,

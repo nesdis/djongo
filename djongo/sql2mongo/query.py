@@ -780,8 +780,8 @@ class Query:
         self._sql = re.sub(r'%s', self._param_index, sql)
         self.last_row_id = None
         self._result_generator = None
-
         self._query = self.parse()
+        # print(self._query)
 
     def count(self):
         return self._query.count()
@@ -839,6 +839,8 @@ class Query:
             f'params: {self._params}'
         )
         statement = sqlparse(self._sql)
+        # print(statement)
+        # print(self._sql)
 
         if len(statement) > 1:
             raise SQLDecodeError(self._sql)

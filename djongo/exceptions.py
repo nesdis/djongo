@@ -40,5 +40,5 @@ def print_warn(feature=None, message=None):
     if feature not in _printed_features:
         message = ((message or f'This version of djongo does not support "{feature}" fully. ')
                    + f'Visit {djongo_access_url}')
-        print(message)
+        # print(message)
         _printed_features.add(feature)
