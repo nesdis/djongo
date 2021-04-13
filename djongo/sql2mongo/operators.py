@@ -85,6 +85,7 @@ class _BinaryOp(_Op):
     def evaluate(self):
         pass
 
+
 class _InNotInOp(_BinaryOp):
 
     def _fill_in(self, token):
@@ -392,7 +393,10 @@ class _StatementParser:
             op = IsOp(**kw)
 
         elif isinstance(tok, Comparison):
-            op = CmpOp(tok, self.query)
+            if isinstance(tok.tokens[0], Function):
+                op = FuncOp(tok, self.query)
+            else:
+                op = CmpOp(tok, self.query)
 
         elif isinstance(tok, Parenthesis):
             if (tok[1].match(tokens.Name.Placeholder, '.*', regex=True)
@@ -531,6 +535,24 @@ class CmpOp(_Op):
         else:
             return {field: {'$not': {self._operator: self._constant}}}
 
+
+class FuncOp(CmpOp):
+
+    def to_mongo(self):
+        field = self._identifier.field
+        if self._field_ext:
+            field += '.' + self._field_ext
+        func = self.statement.tokens[0].get_name().lower()
+        if func == 'day':
+            func = 'dayOfMonth'
+        return {
+            '$expr': {
+                self._operator: [
+                    {'$' + func: '$' + field},
+                    self._constant
+                ]
+            }
+        }
 
 OPERATOR_MAP = {
     '=': '$eq',

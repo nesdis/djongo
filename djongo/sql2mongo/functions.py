@@ -59,7 +59,10 @@ class SingleParamFunc(SQLFunc):
     def field(self):
         if self.alias:
             return self.alias
-        alias = self.query.token_alias.token2alias[self]
+        try:
+            alias = self.query.token_alias.token2alias[self]
+        except KeyError:
+            alias = self.column
         return alias
 
     @abc.abstractmethod
